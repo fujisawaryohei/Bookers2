@@ -5,7 +5,7 @@
 #   gem 'sqlite3'
 #
 
-# TODO: 提出時にはこちらで提出
+# TODO: default, development, testに関しては提出時に下記の内容で提出
 # default: &default
 #   adapter: sqlite3
 #   pool: 5
@@ -22,30 +22,30 @@
 #   <<: *default
 #   database: db/test.sqlite3
 
-# production:
-#   <<: *default
-#   database: db/production.sqlite3
-
 default: &default
   adapter: postgresql
   encoding: unicode
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
   username: postgres
   password: postgres
 
 development:
   <<: *default
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
+  host: 'localhost'
   database: bookers2_dev
 
 test:
   <<: *default
+  host: 'localhost'
   database:  bookers2_test
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
 
 production:
   <<: *default
-  database: todo-app_production
-  username: postgres
-  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
-  url: <%= ENV['DATABASE_URL'] %>
+  database: <%= ENV['DB_DATABASE'] %>
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
+  host: <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
