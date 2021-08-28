@@ -29,6 +29,8 @@ gem 'capistrano-rails', group: :development
 
 gem 'devise'
 
+gem 'seed-fu'
+
 group :development, :test do
   gem 'byebug', platform: :mri
 end
