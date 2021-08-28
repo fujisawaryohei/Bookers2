@@ -8,5 +8,11 @@ Rails.application.routes.draw do
   end
 
   # 認証 ルーティング
-  devise_for :users
+  devise_for :users, controlers: {
+    'registrations': 'registrations',
+    'sessions': 'sessions',
+    'passwords': 'passwords'
+  }
+
+  resource :users
 end
