@@ -33,6 +33,7 @@ gem 'seed-fu'
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'faker'
 end
 
 group :development do
@@ -46,7 +47,7 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'rspec-rails'
   gem "factory_bot_rails"
-  gem 'faker'
+  # gem 'faker'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
