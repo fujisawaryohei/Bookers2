@@ -14,5 +14,9 @@ Rails.application.routes.draw do
     'passwords': 'passwords'
   }
 
+  # Userリソース ルーティング
   resource :users
+
+  # Postリソース ルーティング
+  resource :books
 end
