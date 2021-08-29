@@ -1,0 +1,95 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: create EC2 instance
+Resources:
+  # EC2の作成
+  Bookers2EC2:
+    Type: AWS::EC2::Instance
+    Properties: 
+      # AdditionalInfo: String
+      # Affinity: String
+      # AvailabilityZone: String
+      # BlockDeviceMappings: 
+      #   - BlockDeviceMapping
+      # CpuOptions: 
+      #   CpuOptions
+      CreditSpecification: 
+        CPUCredits: standard
+      DisableApiTermination: true
+      EbsOptimized: false
+      # ElasticGpuSpecifications: 
+      #   - ElasticGpuSpecification
+      # ElasticInferenceAccelerators: 
+      #   - ElasticInferenceAccelerator
+      # EnclaveOptions: 
+      #   EnclaveOptions
+      # HibernationOptions: 
+      #   HibernationOptions
+      # HostId: String
+      # HostResourceGroupArn: String
+      # IamInstanceProfile: String
+      ImageId: ami-09ebacdc178ae23b7
+      InstanceInitiatedShutdownBehavior: stop
+      InstanceType: t2.micro
+      # Ipv6AddressCount: Integer
+      # Ipv6Addresses: 
+      #   - InstanceIpv6Address
+      # KernelId: String
+      # KeyName: String
+      # LaunchTemplate: 
+      #   LaunchTemplateSpecification
+      # LicenseSpecifications: 
+      #   - LicenseSpecification
+      # Monitoring: Boolean
+      NetworkInterfaces: 
+        - AssociatePublicIpAddress: true
+          DeleteOnTermination: true
+          # Description: String
+          DeviceIndex: "0"
+          GroupSet: 
+            - !ImportValue StackBookers2SecurityGroup
+          # Ipv6AddressCount: Integer
+          # Ipv6Addresses: 
+          #   - InstanceIpv6Address
+          # NetworkInterfaceId: String
+          # PrivateIpAddress: String
+          # PrivateIpAddresses: 
+          #   - PrivateIpAddressSpecification
+          # SecondaryPrivateIpAddressCount: Integer
+          SubnetId: !ImportValue StackBookers2PublicSubnet1A
+      # PlacementGroupName: String
+      # PrivateIpAddress: String
+      # RamdiskId: String
+      # SecurityGroupIds: 
+      #   - String
+      # SecurityGroups: 
+      #   - String
+      # SourceDestCheck: Boolean
+      # SsmAssociations: 
+      #   - SsmAssociation
+      # SubnetId: String
+      Tags: 
+        - Key: Name
+          Value: bookers2-public-1a
+      # Tenancy: String
+      # UserData: String
+      # Volumes: 
+      #   - Volume
+
+  # EIPのアタッチ
+  Bookers2EIP:
+    Type: AWS::EC2::EIP
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref Bookers2EC2
+      # PublicIpv4Pool: String
+      Tags:
+        - Key: Name
+          Value: bookers2-eip
+
+# エクスポート
+Outputs:
+  StackBookers2EIP:
+    Description: The EIP of the EC2 Instance
+    Value: !Ref Bookers2EIP
+    Export:
+      Name: StackBookers2EIP

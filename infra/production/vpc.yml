@@ -1,0 +1,131 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC and Subnet Stuck
+Resources:
+  # VPCの作成
+  Bookers2VPC:
+    Type: AWS::EC2::VPC
+    Properties: 
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: false
+      EnableDnsSupport: false
+      InstanceTenancy: default
+      Tags:
+        - Key: Name
+          Value: bookers2-vpc
+
+  # セキュリティグループの作成とVPCへの登録
+  Bookers2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupDescription: Setting SecurityGroup
+      GroupName: Setting Security Group for users and me
+      SecurityGroupIngress: 
+        - CidrIp: 0.0.0.0/0
+          Description: allow me to access with ssh
+          FromPort: 22
+          ToPort: 22
+          IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
+          Description: allow users to access with http
+          FromPort: 80
+          ToPort: 80
+          IpProtocol: tcp
+        - CidrIp: 0.0.0.0/0
+          Description: ping only
+          FromPort: -1
+          ToPort: -1
+          IpProtocol: icmp
+      Tags:
+        - Key: Name
+          Value: bookers2-security-group
+      VpcId: !Ref Bookers2VPC
+
+  # インターネットゲートウェイの作成
+  Bookers2InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: bookers2-internet-gateway
+
+  # VPCへインターネットゲートウェイのアタッチ
+  AttachmentBookers2InternetGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      InternetGatewayId: !Ref Bookers2InternetGateway
+      VpcId: !Ref Bookers2VPC
+      # VpnGatewayId: String
+  
+  # パブリックサブネットの作成
+  Bookers2PublicSubnet1A:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Bookers2VPC
+      AvailabilityZone: ap-northeast-1a
+      CidrBlock: 10.0.1.0/24
+      # MapPublicIpOnLaunch: boolean
+      Tags:
+        - Key: Name
+          Value: bookers2-public-subnet-1a
+      # AssignIpv6AddressOnCreation: Boolean
+      # Ipv6CidrBlock: String
+
+  # プライベートサブネットの作成
+  Bookers2PrivateSubnet1A:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Bookers2VPC
+      AvailabilityZone: ap-northeast-1a
+      CidrBlock: 10.0.2.0/24
+      # MapPublicIpOnLaunch: boolean
+      Tags:
+        - Key: Name
+          Value: bookers2-private-subnet-1a
+      # AssignIpv6AddressOnCreation: Boolean
+      # Ipv6CidrBlock: String
+
+  # ルートテーブルの作成
+  Bookers2PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      Tags:
+        - Key: Name
+          Value: bookers2-public-routetable
+      VpcId: !Ref Bookers2VPC
+
+  # ルーティング
+  Bookers2PublicRoute:
+    Type: AWS::EC2::Route
+    Properties:
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref Bookers2InternetGateway
+      RouteTableId: !Ref Bookers2PublicRouteTable
+      # DestinationIpv6CidrBlock: -
+      # EgressOnlyInternetGatewayId: -
+      # InstanceId: -
+      # NatGatewayId: -
+      # NetworkInterfaceId: -
+      # TransitGatewayId: -
+      # VpcPeeringConnectionId: -
+      # DependsOn: -
+
+  # サブネットとルートテーブルの紐付け
+  SubnetRouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties: 
+      RouteTableId: !Ref Bookers2PublicRouteTable
+      SubnetId: !Ref Bookers2PublicSubnet1A
+
+# エクスポート
+Outputs:
+  StackBookers2PublicSubnet1A:
+    Description: The ID of the Public Subnet
+    Value: !Ref Bookers2PrivateSubnet1A
+    Export:
+      Name: StackBookers2PublicSubnet1A
+
+  StackBookers2SecurityGroup:
+    Description: The ID of the Security Group
+    Value: !Ref Bookers2SecurityGroup
+    Export:
+      Name: StackBookers2SecurityGroup
