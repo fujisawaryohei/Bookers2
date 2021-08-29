@@ -31,6 +31,10 @@ gem 'devise'
 
 gem 'seed-fu'
 
+gem 'bootstrap', '~> 4.5'
+
+gem 'font-awesome-sass', '~> 5.13'
+
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rails'
