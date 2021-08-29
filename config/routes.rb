@@ -18,5 +18,5 @@ Rails.application.routes.draw do
   resources :users, except: [:new, :create]
 
   # Bookリソース ルーティング
-  resources :books
+  resources :books, except: [:new]
 end

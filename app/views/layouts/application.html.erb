@@ -31,7 +31,11 @@
       <p id="alert"><%= alert %></p>
     </div>
     <main>
-      <%= yield %>
+      <div class="container px-5 px-sm-0">
+        <div class="row">
+          <%= yield %>
+        </div>
+      </div>
     </main>
     <footer>
       <div class="container mt-5">

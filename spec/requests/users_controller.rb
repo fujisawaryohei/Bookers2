@@ -19,7 +19,7 @@ RSpec.describe UsersController, type: :request do
 
     describe 'GET /users' do
       it 'ユーザー一覧ページを返す' do
-        get '/'
+        get users_path
         expect(response.status).to eq 200
       end
     end
@@ -44,14 +44,6 @@ RSpec.describe UsersController, type: :request do
         user.reload
         expect(user.name).to eq 'テスト太郎'
       end
-    end
-
-    describe 'DELETE /users/:id' do
-      it 'ユーザーを削除する' do
-        expect{
-          delete user_path(user)
-        }.to change { User.all.count }.by(-1)
-      end      
     end
   end
 end

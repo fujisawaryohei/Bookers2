@@ -1,7 +1,9 @@
 class BooksController < ApplicationController
   before_action :set_book, except: [:index, :create]
 
-  def index; end
+  def index
+    @books = Book.all
+  end
 
   def show; end
 
@@ -26,7 +28,7 @@ class BooksController < ApplicationController
 
   def destroy
     @book.destroy!
-    redirect_to root_path
+    redirect_to books_path
   end
 
   private

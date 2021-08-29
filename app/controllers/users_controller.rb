@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     # TODO: 必要であればページネーションを追加する
-    @user = User.all
+    @users = User.all
   end
 
   def show; end
@@ -16,11 +16,6 @@ class UsersController < ApplicationController
     else
       render 'edit'
     end
-  end
-
-  def destroy
-    @user.destroy!
-    redirect_to root_path
   end
 
   private

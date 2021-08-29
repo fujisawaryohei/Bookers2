@@ -1,0 +1,14 @@
+<form action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+  <input type="hidden" name="authenticity_token" value="CA4nup8H6fcCEJOc/RLc8FU/ZwimPuhWWWhthlZXGpyAMZpDdwKO9IJgxLMky0aReOK1JRUV8aeMgRyGlIjiKw==">
+  <div class="form-group">
+    <label for="book_title">Title</label>
+    <input class="form-control book_title" type="text" name="book[title]" id="book_title">
+  </div>
+  <div class="form-group">
+    <label for="book_opinion">Opinion</label>
+    <textarea class="form-control book_body" name="book[body]" id="book_body"></textarea>
+  </div>
+  <div class="form-group">
+    <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book">
+  </div>
+</form>
