@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   }
 
   # Userリソース ルーティング
-  resources :users, exept: [:new, :create]
+  resources :users, except: [:new, :create]
 
-  # Postリソース ルーティング
+  # Bookリソース ルーティング
   resources :books
 end
