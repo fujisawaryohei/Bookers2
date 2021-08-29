@@ -53,7 +53,8 @@ group :test do
 end
 
 group :production do
-  gem 'mysql2'
+  # TODO: インストールされないので一旦Postgresqlで本番環境作る
+  # gem 'mysql2'
   gem 'dotenv-rails'
 end
 
