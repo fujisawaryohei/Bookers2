@@ -16,4 +16,7 @@ class User < ApplicationRecord
   def password_required?
     new_record? || (persisted? && (password.present? || password_confirmation.present?))
   end
+
+  # Refile
+  attachment :profile_image
 end
