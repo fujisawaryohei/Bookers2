@@ -1,0 +1,34 @@
+ja:
+  activerecord:
+    models:
+      user: "ユーザー"
+      book: "本"
+    attributes:
+      user:
+        name: "名前"
+        email: "メールアドレス"
+        introduction: 紹介文
+        password: "パスワード"
+        password_confirmation: "確認用パスワード"
+      book:
+        title: "タイトル"
+        body: "感想"
+    errors:
+      models:
+        user:
+          blank: を入力してください
+          required: を入力してください
+          empty: を入力してください
+          too_long: は%{count}文字以内で入力してください
+        book:
+          blank: を入力してください
+          required: を入力してください
+          empty: を入力してください
+          too_long: は%{count}文字以内で入力してください
+          attributes:
+            user:
+              blank: を入力してください
+              required: を入力してください
+              empty: を入力してください
+              too_long: は%{count}文字以内で入力してください
+              
