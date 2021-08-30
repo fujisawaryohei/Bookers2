@@ -26,12 +26,9 @@
         </div>
       </nav>
     </header>
-    <div class="msg">
-      <p id="notice"><%= notice %></p>
-      <p id="alert"><%= alert %></p>
-    </div>
+    <%= render 'layouts/alert' %>
     <main>
-      <div class="container px-5 px-sm-0">
+      <div class="container">
         <div class="row">
           <%= yield %>
         </div>
