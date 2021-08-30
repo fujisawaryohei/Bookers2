@@ -1,5 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index]
+  before_action -> {
+    check_edit_permission(params[:id])
+  }, only: [:edit, :update]
 
   def index
     # TODO: 必要であればページネーションを追加する
@@ -26,5 +29,11 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :introduction, :email, :password, :password_confirmation)
+  end
+
+  def check_edit_permission(id)
+    unless current_user.id == id.to_i
+      redirect_to user_path(current_user), alert: "編集権限がありません"
+    end
   end
 end
