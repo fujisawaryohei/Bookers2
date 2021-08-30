@@ -5,7 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
+gem 'rails', '~> 5.2.4', '>= 5.2.4.2'
+
+gem 'bootsnap', require: false
 
 gem 'sqlite3'
 # TODO: リポジトリ提出時には削除する
