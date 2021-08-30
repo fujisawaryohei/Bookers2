@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     # TODO: 必要であればページネーションを追加する
-    @users = User.all
+    @users = User.all.order(created_at: :desc)
   end
 
   def show; end

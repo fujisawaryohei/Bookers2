@@ -1,21 +1,16 @@
 <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-  <h1>Editing Book</h1>  	
-  <form action="/books/14493" accept-charset="UTF-8" method="post">
-    <input name="utf8" type="hidden" value="✓">
-    <input type="hidden" name="_method" value="patch">
-    <input type="hidden" name="authenticity_token" value="a0xQvW0pY0pEQKd87GkVSqFq88VbdDd1e8WIpbH9Tk0ocN9D8VmKrQv6A5k3k7t4Uc/uBFkjmJ6FO8leT4teSw==">
+  <h1>Editing Book</h1>
+  <%= form_with model: @book do |f| %>
     <div class="form-group">
-      <label for="book_title">Title</label>
-      <input class="form-control book_title" type="text" value="実践ドメイン駆動設計" name="book[title]" id="book_title">
+      <%= f.label :title %>
+      <%= f.text_field :title, class: "form-control" %>
     </div>
+
     <div class="form-group">
-      <label for="book_opinion">Opinion</label>
-      <textarea class="form-control book_body" name="book[body]" id="book_body">面白かった</textarea>
+      <%= f.label :body %>
+      <%= f.text_area :body, class: "form-control" %>
     </div>
-    <div class="form-group">
-      <input type="submit" name="commit" value="Update Book" class="btn btn-success" data-disable-with="Update Book">
-    </div>
-  </form>
-  <a class="book_14493" href="/books/14493">Show</a> |
-  <a class="back" href="/books">Back</a>
+
+    <%= f.submit "更新する", class: "btn btn-secondary" %>
+  <% end %>
 </div>

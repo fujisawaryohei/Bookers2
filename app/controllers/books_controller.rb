@@ -2,13 +2,14 @@ class BooksController < ApplicationController
   before_action :set_book, except: [:index, :create]
 
   def index
-    @books = Book.all
+    # TODO: 必要であればページネーション実装する
+    @books = Book.all.order(created_at: :desc)
   end
 
   def show; end
 
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
     if @book.save
       redirect_to books_path
     else
@@ -38,6 +39,6 @@ class BooksController < ApplicationController
   end
 
   def book_params
-    params.require(:book).permit(:user_id, :title, :body)
+    params.require(:book).permit(:title, :body)
   end
 end
