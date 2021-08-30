@@ -1,5 +1,8 @@
 class BooksController < ApplicationController
   before_action :set_book, except: [:index, :create]
+  before_action -> {
+    check_edit_permission(params[:id])
+  }, only: [:edit, :update]
 
   def index
     # TODO: 必要であればページネーション実装する
@@ -40,5 +43,12 @@ class BooksController < ApplicationController
 
   def book_params
     params.require(:book).permit(:title, :body)
+  end
+
+  def check_edit_permission(id)
+    user_id = Book.find(id).user.id
+    unless current_user == user_id
+      redirect_to user_path(current_user), alert: "編集権限がありません"
+    end
   end
 end
