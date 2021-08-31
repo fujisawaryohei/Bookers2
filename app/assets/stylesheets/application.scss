@@ -47,14 +47,36 @@ img {
   border-radius: 30%;
 }
 
+// プロフィール
+.users-profile {
+  margin-bottom: 2.5rem;
+  img {
+    text-align: center;
+  }
+  table {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .row {
+    margin: 1rem;
+  }
+}
+
+// 本の投稿フォーム
+.books-form {
+  h2 {
+    font-size: 1.5rem;
+  }
+}
+
 // バリデーションエラーメッセージ
 #validation_error_explanation {
   color: red;
   font: bold;
   p {
-    font-size: 30%;
+    font-size: 1rem;
   }
   .error-list {
-    font-size: 20%;
+    font-size: 0.5rem;
   }
 }

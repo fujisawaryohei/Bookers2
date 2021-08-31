@@ -1,0 +1,5 @@
+<% if resource.send(attribute).present? %>
+  <%= attachment_image_tag(resource, attribute, :fill, width, height) %>
+<% else %>
+  <%= image_tag 'default.png', width: width, height: height %>
+<% end %>

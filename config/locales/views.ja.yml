@@ -1,0 +1,24 @@
+ja:
+  views:
+    role:
+      back: 戻る
+      index: 一覧
+      show: 詳細
+      new: 新規登録
+      edit: 編集
+      info: 情報
+      create: 作成
+      update: 更新
+      delete: 削除
+      submit: 登録
+    alert:
+      sure: 削除してよろしいですか？
+    notice:
+      created: "%{model}を登録しました"
+      updated: "%{model}を更新しました"
+      deleted: "%{model}を削除しました"
+      copied: "%{model}を複製しました"
+      invalid_error: "不備があります"
+    message:
+      select_one: "選択してください"
+      required: "必須"

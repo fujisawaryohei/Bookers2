@@ -1,18 +1,19 @@
-<h2>User info</h2>
-<%= attachment_image_tag(user, :profile_image, :fill, 300, 300) %>
-<table class="table">
-  <tbody>
-  <tr></tr>
-  <tr>
-    <th><%= I18n.t('activerecord.attributes.user.name') %></th>
-    <th><%= user.name %></th>
-  </tr>
-  <tr>
-    <th><%= I18n.t('activerecord.attributes.user.introduction') %></th>
-    <th><%= user.introduction %></th>
-  </tr>
-  </tbody>
-</table>
+<div class="users-profile">
+  <h2><%= I18n.t("activerecord.models.user") %><%= I18n.t("views.role.info") %></h2>
+  <%= render 'layouts/icon', resource: user, attribute: :profile_image, width: 200, height: 200 %>
+  <table class="table">
+    <tbody>
+    <tr></tr>
+    <tr>
+      <th><%= I18n.t('activerecord.attributes.user.name') %></th>
+      <th><%= user.name %></th>
+    </tr>
+    <tr>
+      <th><%= I18n.t('activerecord.attributes.user.introduction') %></th>
+      <th><%= user.introduction %></th>
+    </tr>
+    </tbody>
+  </table>
   <div class="row">
     <% if signed_in_user?(user) %>
       <%= link_to edit_user_path(user), class: "btn btn-outline-secondary btn-block" do %>
@@ -20,3 +21,4 @@
       <% end %>
     <% end %>
   </div>
+</div>
