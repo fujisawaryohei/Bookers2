@@ -7,7 +7,8 @@ ja:
       user:
         name: "名前"
         email: "メールアドレス"
-        introduction: 紹介文
+        introduction: "紹介"
+        profile_image: "プロフィール画像"
         password: "パスワード"
         password_confirmation: "確認用パスワード"
       book:
