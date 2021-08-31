@@ -29,9 +29,13 @@
     <%= render 'layouts/alert' %>
     <main>
       <div class="container">
-        <div class="row">
+        <% if password_reset_page? %>
           <%= yield %>
-        </div>
+        <% else %>
+          <div class="row">
+            <%= yield %>
+          </div>
+        <% end %>
       </div>
     </main>
     <footer>

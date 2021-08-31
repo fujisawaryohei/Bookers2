@@ -19,4 +19,7 @@ Rails.application.routes.draw do
 
   # Bookリソース ルーティング
   resources :books, except: [:new]
+
+  # Letter_opener_web
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
