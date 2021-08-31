@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :new_book, only: [:index, :show]
-  before_action -> {
+  before_action lambda {
     permission_checker(params[:id])
   }, only: [:edit, :update, :destroy]
 
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to books_path, notice: I18n.t("views.notice.updated", model: Book.t)
+      redirect_to books_path, notice: I18n.t('views.notice.updated', model: Book.t)
     else
       render 'edit'
     end
@@ -39,7 +39,7 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     @book.destroy!
-    redirect_to books_path, notice: I18n.t("views.notice.deleted", model: Book.t)
+    redirect_to books_path, notice: I18n.t('views.notice.deleted', model: Book.t)
   end
 
   private
@@ -54,8 +54,6 @@ class BooksController < ApplicationController
 
   def permission_checker(id)
     user_id = Book.find(id).user.id
-    unless current_user.id == user_id
-      redirect_to user_path(current_user), alert: I18n.t("views.alert.prohibited.edit")
-    end
+    redirect_to user_path(current_user), alert: I18n.t('views.alert.prohibited.edit') unless current_user.id == user_id
   end
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :new_book, only: [:index, :show]
-  before_action -> {
+  before_action lambda {
     edit_permission_checker(params[:id].to_i)
   }, only: [:edit, :update]
 
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
@@ -37,8 +37,6 @@ class UsersController < ApplicationController
   end
 
   def edit_permission_checker(id)
-    unless current_user.id == id
-      redirect_to user_path(current_user), alert: I18n.t("views.alert.prohibited.edit")
-    end
+    redirect_to user_path(current_user), alert: I18n.t('views.alert.prohibited.edit') unless current_user.id == id
   end
 end

@@ -1,0 +1,80 @@
+require:
+  - rubocop-rspec
+  - rubocop-rails
+
+AllCops:
+  TargetRubyVersion: 3.0.0
+
+  Exclude:
+    - "db/**/*"
+    - "config/**/*"
+    - "bin/*"
+    - "spec/**/*"
+    - "db/**/*"
+    - "server/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+    - "vendor/**/*"
+    - "lib/**/*"
+    - "node_modules/**/*"
+    - "Rakefile"
+    - "Capfile"
+    - "app/controllers/registrations_controller.rb"
+    - "app/controllers/sessions_controller.rb"
+    - "app/controllers/passwords_controller.rb"
+
+# Gemfileに記載されているGemの重複を許可しない
+Bundler/DuplicatedGem:
+  Enabled: true
+
+# 日本語のコメントを許可する
+Style/AsciiComments:
+  Enabled: false
+
+# シンボルの配列に%iを使用するようにする
+Style/SymbolArray:
+  Enabled: false
+
+# マジックコメントによる文字列の不変化を許可しない
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# ドキュメントのないPublic Classを許可する
+Style/Documentation:
+  Enabled: false
+
+# 空のメソッドを一行で定義することを強制する
+Style/EmptyMethod:
+  Enabled: true
+
+# モジュール, クラスのネストの書き方を強制することを許可しない
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# 配列の生成時にブラケットを使用することを強制する
+Style/WordArray:
+  EnforcedStyle: brackets
+
+# 0, >, < をメソッド(positive?, negative?, zero?)を使用して書くことを強制しない
+Style/NumericPredicate:
+  Enabled: false
+
+# 数値リテラルを3ケタ区切りで _ で区切る事を強制しない
+Style/NumericLiterals:
+  Enabled: false
+
+# 冗長なSelfを使用しているかチェックする
+Style/RedundantSelf:
+  Enabled: false
+
+# 正規表現のリテラルの記法を %r で強制しない
+Style/RegexpLiteral:
+  Enabled: false
+
+# メソッドの名前を20文字で制限する
+Metrics/MethodLength:
+  Max: 20
+
+# ABCテストの点数の上限を25に設定
+Metrics/AbcSize:
+  Max: 30
