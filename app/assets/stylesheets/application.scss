@@ -40,3 +40,15 @@ img {
   border-style: none;
   border-radius: 30%;
 }
+
+// エラーメッセージ
+#error_explanation {
+  color: red;
+  font: bold;
+  p {
+    font-size: 20%;
+  }
+  .error-list {
+    font-size: 10%;
+  }
+}

@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, except: [:index]
+  before_action :new_book, only: [:index, :show]
   before_action -> {
     edit_permission_checker(params[:id].to_i)
   }, only: [:edit, :update]
@@ -9,11 +9,16 @@ class UsersController < ApplicationController
     @users = User.all.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @user = User.find(params[:id])
+  end
   
-  def edit; end
+  def edit
+    @user = User.find(params[:id])
+  end
 
   def update
+    @user = User.find(params[:id])
     if @user.update(user_params)
       redirect_to user_path
     else
@@ -23,8 +28,8 @@ class UsersController < ApplicationController
 
   private
 
-  def set_user
-    @user = User.find(params[:id])
+  def new_book
+    @book = current_user.books.build
   end
 
   def user_params

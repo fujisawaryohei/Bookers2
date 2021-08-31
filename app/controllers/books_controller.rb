@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :set_book, except: [:index, :create]
+  before_action :new_book, only: [:index, :show]
   before_action -> {
     permission_checker(params[:id])
   }, only: [:edit, :update, :destroy]
@@ -9,20 +9,26 @@ class BooksController < ApplicationController
     @books = Book.all.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @book = Book.find(params[:id])
+  end
 
   def create
-    @book = current_user.books.build(book_params)
-    if @book.save
-      redirect_to books_path
+    @new_book = current_user.books.build(book_params)
+    if @new_book.save
+      redirect_to book_path(@new_book)
     else
+      @books = Book.all.order(created_at: :desc)
       render 'index'
     end
   end
 
-  def edit; end
+  def edit
+    @book = Book.find(params[:id])
+  end
 
   def update
+    @book = Book.find(params[:id])
     if @book.update(book_params)
       redirect_to books_path
     else
@@ -31,14 +37,15 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    @book = Book.find(params[:id])
     @book.destroy!
     redirect_to books_path
   end
 
   private
 
-  def set_book
-    @book = Book.find(params[:id])
+  def new_book
+    @new_book = current_user.books.build
   end
 
   def book_params

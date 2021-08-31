@@ -1,4 +1,5 @@
-<%= form_with model: Book.new do |f| %>
+<%= render 'shared/error_messages', resource: book %>
+<%= form_with model: book do |f| %>
   <div class="form-group">
     <%= f.label :title%>
     <%= f.text_field :title, class: "form-control" %>

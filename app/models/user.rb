@@ -8,8 +8,8 @@ class User < ApplicationRecord
   has_many :books
 
   # Validation
-  validates :name, presence: true, length: { maximum: 50 }
-  validates :email, length: { maximum: 255 }, allow_blank: true
+  validates :name, presence: true, length: { maximum: 30 }
+  validates :email, length: { maximum: 50 }, allow_blank: true
 
   # deviseのvalidatableのpassword_confirmationをオーバーライドしてバリデーションをカスタマイズ
   # 編集時にのみパスワードと確認用パスワードは任意にするようにする
