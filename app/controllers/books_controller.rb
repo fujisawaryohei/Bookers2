@@ -5,7 +5,7 @@ class BooksController < ApplicationController
   }, only: [:edit, :update, :destroy]
 
   def index
-    # TODO: 必要であればページネーション実装する
+    # TODO: 余裕があればページネーション実装する
     @books = Book.all.order(created_at: :desc)
   end
 
@@ -16,7 +16,7 @@ class BooksController < ApplicationController
   def create
     @new_book = current_user.books.build(book_params)
     if @new_book.save
-      redirect_to book_path(@new_book)
+      redirect_to book_path(@new_book), notice: I18n.t('views.notice.created', model: Book.t)
     else
       @books = Book.all.order(created_at: :desc)
       render 'index'
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to books_path
+      redirect_to books_path, notice: I18n.t("views.notice.updated", model: Book.t)
     else
       render 'edit'
     end
@@ -39,7 +39,7 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     @book.destroy!
-    redirect_to books_path
+    redirect_to books_path, notice: I18n.t("views.notice.deleted", model: Book.t)
   end
 
   private
@@ -55,7 +55,7 @@ class BooksController < ApplicationController
   def permission_checker(id)
     user_id = Book.find(id).user.id
     unless current_user.id == user_id
-      redirect_to user_path(current_user), alert: "編集権限がありません"
+      redirect_to user_path(current_user), alert: I18n.t("views.alert.prohibited.edit")
     end
   end
 end

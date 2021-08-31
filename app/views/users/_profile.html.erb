@@ -1,15 +1,15 @@
 <div class="users-profile">
-  <h2><%= I18n.t("activerecord.models.user") %><%= I18n.t("views.role.info") %></h2>
+  <h2><%= User.t %><%= I18n.t("views.role.info") %></h2>
   <%= render 'layouts/icon', resource: user, attribute: :profile_image, width: 200, height: 200 %>
   <table class="table">
     <tbody>
     <tr></tr>
     <tr>
-      <th><%= I18n.t('activerecord.attributes.user.name') %></th>
+      <th><%= User.t(:name) %></th>
       <th><%= user.name %></th>
     </tr>
     <tr>
-      <th><%= I18n.t('activerecord.attributes.user.introduction') %></th>
+      <th><%= User.t(:introduction) %></th>
       <th><%= user.introduction %></th>
     </tr>
     </tbody>

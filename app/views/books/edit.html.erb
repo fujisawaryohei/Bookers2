@@ -1,5 +1,5 @@
 <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-  <h1>Editing Book</h1>
+  <h1><%= Book.t %> <%= I18n.t("views.role.edit") %></h1>
   <%= form_with model: @book do |f| %>
     <div class="form-group">
       <%= f.label :title %>
@@ -11,6 +11,6 @@
       <%= f.text_area :body, class: "form-control" %>
     </div>
 
-    <%= f.submit "更新する", class: "btn btn-secondary" %>
+    <%= f.submit I18n.t("views.role.update") , class: "btn btn-secondary" %>
   <% end %>
 </div>

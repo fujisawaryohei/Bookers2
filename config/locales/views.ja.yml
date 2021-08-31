@@ -13,6 +13,8 @@ ja:
       submit: 登録
     alert:
       sure: 削除してよろしいですか？
+      prohibited:
+        edit: "編集権限がありません"
     notice:
       created: "%{model}を登録しました"
       updated: "%{model}を更新しました"

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   }, only: [:edit, :update]
 
   def index
-    # TODO: 必要であればページネーションを追加する
+    # TODO: 必要がページネーションを追加する
     @users = User.all.order(created_at: :desc)
   end
 
@@ -20,7 +20,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      redirect_to user_path
+      redirect_to user_path, notice: I18n.t('views.notice.updated', model: User.t)
     else
       render 'edit'
     end
@@ -38,7 +38,7 @@ class UsersController < ApplicationController
 
   def edit_permission_checker(id)
     unless current_user.id == id
-      redirect_to user_path(current_user), alert: "編集権限がありません"
+      redirect_to user_path(current_user), alert: I18n.t("views.alert.prohibited.edit")
     end
   end
 end
