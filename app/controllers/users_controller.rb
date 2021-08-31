@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index]
   before_action -> {
-    check_edit_permission(params[:id])
+    edit_permission_checker(params[:id].to_i)
   }, only: [:edit, :update]
 
   def index
@@ -31,8 +31,8 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :profile_image, :introduction, :email, :password, :password_confirmation)
   end
 
-  def check_edit_permission(id)
-    unless current_user.id == id.to_i
+  def edit_permission_checker(id)
+    unless current_user.id == id
       redirect_to user_path(current_user), alert: "編集権限がありません"
     end
   end
