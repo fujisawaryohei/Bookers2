@@ -1,0 +1,21 @@
+en:
+  views:
+    role:
+      index: "%{model}s"
+      detail: "%{model} detail"
+      new: "New %{model}"
+      edit: "Editing %{model}"
+      info: "%{model} info"
+      create: Create
+      show: Show
+      update: Edit
+      delete: Destroy
+      submit: Submit
+    alert:
+      sure: 本当に消しますか？
+      prohibited:
+        edit: "you are unpermited to edit"
+    notice:
+      created: "%{model} is created"
+      updated: "%{model} is updated"
+      deleted: "%{model} is delted"

@@ -1,11 +1,10 @@
 <div class="user-list">
-  <h2><%= User.t %> <%= I18n.t("views.role.index") %></h2>
+  <h2><%= I18n.t("views.role.index", model: User.t) %></h2>
   <table class="table">
     <thead>
       <tr>
-        <th></th>
+        <th><%= User.t(:profile_image)%></th>
         <th><%= User.t(:name) %></th>
-        <th><%= I18n.t("views.role.show") %></th>
         <th colspan="3"></th>
       </tr>
     </thead>

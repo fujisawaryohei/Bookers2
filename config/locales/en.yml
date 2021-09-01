@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      user: User
+      book: Book
+    attributes:
+      user:
+        name: name
+        email: email
+        introduction: introduction
+        profile_image: image
+        password: password
+        password_confirmation: password_confirmation
+      book:
+        title: Title
+        body: Opinion

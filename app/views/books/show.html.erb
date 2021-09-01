@@ -3,7 +3,7 @@
   <%= render 'form', book: @new_book %>
 </div>
 <div class="col-md-8 offset-md-1">
-  <h2><%= Book.t %> <%= I18n.t("views.role.show") %></h2>
+  <h2><%= I18n.t("views.role.show", model: Book.t) %></h2>
   <div class="book-detail">
     <table class="table">
       <tbody>
@@ -21,7 +21,7 @@
           <td><%= @book.body %></td>
           <% if signed_in_user?(@book.user) %>
             <td>
-              <%= link_to I18n.t("views.role.edit"), edit_book_path(@book), class: "btn btn-sm btn-success"%>
+              <%= link_to I18n.t("views.role.update"), edit_book_path(@book), class: "btn btn-sm btn-success"%>
             </td>
             <td>
               <%= link_to I18n.t("views.role.delete"), book_path(@book), method: :delete, class: "btn btn-sm btn-danger", data: { confirm: I18n.t("views.alert.sure") } %>

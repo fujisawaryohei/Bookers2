@@ -32,4 +32,3 @@ ja:
               required: を入力してください
               empty: を入力してください
               too_long: は%{count}文字以内で入力してください
-              

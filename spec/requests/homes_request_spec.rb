@@ -10,7 +10,7 @@ RSpec.describe HomesController, type: :request do
 
   describe 'GET /homes/about' do
     it 'Aboutページを返す' do
-      get homes_about_path
+      get home_about_path
       expect(response.status).to eq 200
     end
   end
