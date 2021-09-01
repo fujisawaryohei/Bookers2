@@ -61,7 +61,6 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref Bookers2VPC
-      AvailabilityZone: ap-northeast-1a
       CidrBlock: 10.0.1.0/24
       # MapPublicIpOnLaunch: boolean
       Tags:
@@ -75,7 +74,6 @@ Resources:
     Type: AWS::EC2::Subnet
     Properties:
       VpcId: !Ref Bookers2VPC
-      AvailabilityZone: ap-northeast-1a
       CidrBlock: 10.0.2.0/24
       # MapPublicIpOnLaunch: boolean
       Tags:
@@ -118,12 +116,28 @@ Resources:
 
 # エクスポート
 Outputs:
+  # RDS 参照
+  StackBookers2VPC:
+    Description: The ID of the VPC
+    Value: !Ref Bookers2VPC
+    Export:
+      Name: StackBookers2VPC
+
+  # EC2 参照
   StackBookers2PublicSubnet1A:
     Description: The ID of the Public Subnet
-    Value: !Ref Bookers2PrivateSubnet1A
+    Value: !Ref Bookers2PublicSubnet1A
     Export:
       Name: StackBookers2PublicSubnet1A
 
+  # RDS 参照
+  StackBookers2PrivateSubnet1A:
+    Description: The ID of the Private Subnet
+    Value: !Ref Bookers2PrivateSubnet1A
+    Export:
+      Name: StackBookers2PrivateSubnet1A
+
+  # RDS 参照
   StackBookers2SecurityGroup:
     Description: The ID of the Security Group
     Value: !Ref Bookers2SecurityGroup

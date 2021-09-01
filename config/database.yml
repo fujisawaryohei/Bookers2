@@ -1,49 +1,22 @@
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: 5
-  port: 5432
-  host: localhost
-  username: postgres
-  password: postgres
+  timeout: 5000
 
 development:
   <<: *default
-  database: bookers2_dev
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database:  bookers2_test
+  database: db/test.sqlite3
 
-production: 
-  <<: *default
+production:
+  adapter: mysql2
+  encoding: utf8mb4
+  charset: utf8mb4
+  collation: utf8mb4_general_ci
   host: <%= ENV['DB_HOST'] %>
   database: <%= ENV['DB_DATABASE'] %>
   username: <%= ENV['DB_USERNAME'] %>
-  password: <%= ENV['DB_PASSOWORD'] %>
-
-
-# TODO: default, development, testに関しては提出時に下記の内容で提出
-# default: &default
-#   adapter: sqlite3
-#   pool: 5
-#   timeout: 5000
-
-# development:
-#   <<: *default
-#   database: db/development.sqlite3
-#
-# test:
-#   <<: *default
-#   database: db/test.sqlite3
-#
-# production:
-#   <<: *default
-#   adapter: mysql2
-#   encoding: utf8mb4
-#   charset: utf8mb4
-#   collation: utf8mb4_general_ci
-#   host: <%= ENV['DB_HOST'] %>
-#   database: <%= ENV['DB_DATABASE'] %>
-#   username: <%= ENV['DB_USERNAME'] %>
-#   password: <%= ENV['DB_PASSWORD'] %>
+  password: <%= ENV['DB_PASSWORD'] %>

@@ -41,10 +41,11 @@ gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 
 gem 'refile-mini_magick'
 
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop'
@@ -63,12 +64,11 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'rspec-rails'
-  # gem 'faker'
 end
 
 group :production do
   # TODO: インストールされないので一旦Postgresqlで本番環境作る
-  # gem 'mysql2'
+  gem 'mysql2'
   gem 'dotenv-rails'
 end
 

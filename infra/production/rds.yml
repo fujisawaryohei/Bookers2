@@ -1,0 +1,89 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description:  Create RDS Instance
+Resources:
+  # サブネットグループの作成
+  Bookers2SubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties: 
+      DBSubnetGroupDescription: create bookers2 subnet group
+      DBSubnetGroupName: bookers2-db-subnet-group
+      SubnetIds: 
+        - !ImportValue StackBookers2PrivateSubnet1A
+      Tags: 
+        - Key: Name
+          Value: bookers2-db-subnet-group
+
+  # セキュリティグループの作成
+  Bookers2SecurityGroup:
+    Type: AWS::RDS::DBSecurityGroup
+    Properties: 
+      EC2VpcId: !ImportValue StackBookers2VPC
+      DBSecurityGroupIngress: 
+        - EC2SecurityGroupId: !ImportValue StackBookers2SecurityGroup
+      GroupDescription: "Backend Access"
+
+  # RDSインスタンスの作成
+  Bookers2RDSInstance:
+    Type: AWS::RDS::DBInstance
+    Properties: 
+      AllocatedStorage: '20'
+      # AllowMajorVersionUpgrade: Boolean
+      # AssociatedRoles: 
+      #   - DBInstanceRole
+      # AutoMinorVersionUpgrade: Boolean
+      # AvailabilityZone: string
+      # BackupRetentionPeriod: Integer
+      # CACertificateIdentifier: String
+      # CharacterSetName: String
+      # CopyTagsToSnapshot: Boolean
+      # DBClusterIdentifier: String
+      DBInstanceClass: db.t3.micro
+      DBInstanceIdentifier: bookers2-rds-instance
+      DBName: bookers2Production
+      # DBParameterGroupName: String
+      DBSecurityGroups: 
+        - !Ref Bookers2SecurityGroup
+      # DBSnapshotIdentifier: String
+      DBSubnetGroupName: todo-app-db-subnet-group
+      # DeleteAutomatedBackups: Boolean
+      # DeletionProtection: Boolean
+      # Domain: String
+      # DomainIAMRoleName: String
+      # EnableCloudwatchLogsExports: 
+      #   - String
+      # EnableIAMDatabaseAuthentication: Boolean
+      # EnablePerformanceInsights: Boolean
+      Engine: mysql
+      EngineVersion: 8.0.25
+      # Iops: Integer
+      # KmsKeyId: String
+      # LicenseModel: String
+      # TODO: パラメーターグループで作成する
+      # MasterUsername: bookers2Admin
+      # TODO: System Managerもしくはパラメーターグループで作成する
+      # MasterUserPassword: 
+      # MaxAllocatedStorage: Integer
+      # MonitoringInterval: Integer
+      # MonitoringRoleArn: String
+      # MultiAZ: Boolean
+      # OptionGroupName: String
+      # PerformanceInsightsKMSKeyId: String
+      # PerformanceInsightsRetentionPeriod: Integer
+      Port: '3306'
+      # PreferredBackupWindow: String
+      # PreferredMaintenanceWindow: String
+      # ProcessorFeatures: 
+      #   - ProcessorFeature
+      # PromotionTier: Integer
+      PubliclyAccessible: false
+      # SourceDBInstanceIdentifier: String
+      # SourceRegion: String
+      # StorageEncrypted: Boolean
+      StorageType: standard
+      Tags: 
+        - Key: Name
+          Value: todo-app-rds-instance
+      # Timezone: String
+      # UseDefaultProcessorFeatures: Boolean
+      # VPCSecurityGroups: 
+      #   - String
