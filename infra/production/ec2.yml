@@ -27,7 +27,7 @@ Resources:
       # HostId: String
       # HostResourceGroupArn: String
       # IamInstanceProfile: String
-      ImageId: ami-0c2b8ca1dad447f8a
+      ImageId: ami-09ebacdc178ae23b7
       InstanceInitiatedShutdownBehavior: stop
       InstanceType: t2.micro
       # Ipv6AddressCount: Integer

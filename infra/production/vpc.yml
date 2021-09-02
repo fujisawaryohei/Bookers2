@@ -62,6 +62,7 @@ Resources:
     Properties:
       VpcId: !Ref Bookers2VPC
       CidrBlock: 10.0.1.0/24
+      AvailabilityZone: ap-northeast-1a
       # MapPublicIpOnLaunch: boolean
       Tags:
         - Key: Name
@@ -75,10 +76,25 @@ Resources:
     Properties:
       VpcId: !Ref Bookers2VPC
       CidrBlock: 10.0.2.0/24
+      AvailabilityZone: ap-northeast-1a
       # MapPublicIpOnLaunch: boolean
       Tags:
         - Key: Name
           Value: bookers2-private-subnet-1a
+      # AssignIpv6AddressOnCreation: Boolean
+      # Ipv6CidrBlock: String
+  
+  # プライベートサブネットの作成
+  Bookers2PrivateSubnet1C:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Bookers2VPC
+      CidrBlock: 10.0.3.0/24
+      AvailabilityZone: ap-northeast-1c
+      # MapPublicIpOnLaunch: boolean
+      Tags:
+        - Key: Name
+          Value: bookers2-private-subnet-1c
       # AssignIpv6AddressOnCreation: Boolean
       # Ipv6CidrBlock: String
 
@@ -116,19 +132,33 @@ Resources:
 
 # エクスポート
 Outputs:
-  # RDS 参照
-  StackBookers2VPC:
-    Description: The ID of the VPC
-    Value: !Ref Bookers2VPC
-    Export:
-      Name: StackBookers2VPC
-
   # EC2 参照
   StackBookers2PublicSubnet1A:
     Description: The ID of the Public Subnet
     Value: !Ref Bookers2PublicSubnet1A
     Export:
       Name: StackBookers2PublicSubnet1A
+
+  # EC2 参照
+  StackBookers2SecurityGroup:
+    Description: The ID of the Security Group
+    Value: !Ref Bookers2SecurityGroup
+    Export:
+      Name: StackBookers2SecurityGroup
+
+  # RDS 参照
+  StackBookers2VPC:
+    Description: The ID of the VPC
+    Value: !Ref Bookers2VPC
+    Export:
+      Name: StackBookers2VPC
+  
+  # RDS 参照
+  StackBookers2VPCCIDR:
+    Description: The CIDR of the VPC
+    Value: !GetAtt Bookers2VPC.CidrBlock
+    Export:
+      Name: StackBookers2VPCCIDR
 
   # RDS 参照
   StackBookers2PrivateSubnet1A:
@@ -138,8 +168,8 @@ Outputs:
       Name: StackBookers2PrivateSubnet1A
 
   # RDS 参照
-  StackBookers2SecurityGroup:
-    Description: The ID of the Security Group
-    Value: !Ref Bookers2SecurityGroup
+  StackBookers2PrivateSubnet1C:
+    Description: The ID of the Private Subnet
+    Value: !Ref Bookers2PrivateSubnet1C
     Export:
-      Name: StackBookers2SecurityGroup
+      Name: StackBookers2PrivateSubnet1C

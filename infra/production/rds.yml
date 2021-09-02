@@ -1,26 +1,72 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description:  Create RDS Instance
+Metadata:
+  "AWS::CloudFormation::Interface":
+    ParameterGroups:
+      - Label:
+          default: "RDS Configuration"
+        Parameters:
+          - DBName
+          - DBMasterUserName
+          - DBPassword
+    ParameterLabels:
+      DBName:
+        default: "DBName"
+      DBMasterUserName:
+        default: "DBMasterUserName"
+      DBPassword:
+        default: "DBPassword"
+
+Parameters:
+  DBName:
+    Type: String
+    Default: "db"
+  DBMasterUserName:
+    Type: String
+    Default: "dbuser"
+    NoEcho: true
+    MinLength: 1
+    MaxLength: 16
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+    ConstraintDescription: "must begin with a letter and contain only alphanumeric characters."
+  DBPassword: 
+    Default: "dbpassword"
+    NoEcho: true
+    Type: String
+    MinLength: 8
+    MaxLength: 41
+    AllowedPattern: "[a-zA-Z0-9]*"
+    ConstraintDescription: "must contain only alphanumeric characters."
+
 Resources:
+  # セキュリティグループの作成
+  Bookers2SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties: 
+      GroupName: "bookers2-db-security-group"
+      GroupDescription: "EC2 Access to RDS"
+      VpcId: !ImportValue StackBookers2VPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: !ImportValue StackBookers2VPCCIDR
+      Tags:
+        - Key: Name
+          Value: bookers2-db-security-group
+  
   # サブネットグループの作成
   Bookers2SubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties: 
-      DBSubnetGroupDescription: create bookers2 subnet group
       DBSubnetGroupName: bookers2-db-subnet-group
+      DBSubnetGroupDescription: create bookers2 subnet group
       SubnetIds: 
         - !ImportValue StackBookers2PrivateSubnet1A
+        - !ImportValue StackBookers2PrivateSubnet1C
       Tags: 
         - Key: Name
           Value: bookers2-db-subnet-group
-
-  # セキュリティグループの作成
-  Bookers2SecurityGroup:
-    Type: AWS::RDS::DBSecurityGroup
-    Properties: 
-      EC2VpcId: !ImportValue StackBookers2VPC
-      DBSecurityGroupIngress: 
-        - EC2SecurityGroupId: !ImportValue StackBookers2SecurityGroup
-      GroupDescription: "Backend Access"
 
   # RDSインスタンスの作成
   Bookers2RDSInstance:
@@ -39,12 +85,12 @@ Resources:
       # DBClusterIdentifier: String
       DBInstanceClass: db.t3.micro
       DBInstanceIdentifier: bookers2-rds-instance
-      DBName: bookers2Production
+      DBName: !Ref DBName
       # DBParameterGroupName: String
-      DBSecurityGroups: 
-        - !Ref Bookers2SecurityGroup
+      # DBSecurityGroups: 
+      #   - DBSecurityGroup
       # DBSnapshotIdentifier: String
-      DBSubnetGroupName: todo-app-db-subnet-group
+      DBSubnetGroupName: !Ref Bookers2SubnetGroup
       # DeleteAutomatedBackups: Boolean
       # DeletionProtection: Boolean
       # Domain: String
@@ -59,9 +105,9 @@ Resources:
       # KmsKeyId: String
       # LicenseModel: String
       # TODO: パラメーターグループで作成する
-      # MasterUsername: bookers2Admin
+      MasterUsername: !Ref DBMasterUserName
       # TODO: System Managerもしくはパラメーターグループで作成する
-      # MasterUserPassword: 
+      MasterUserPassword: !Ref DBPassword
       # MaxAllocatedStorage: Integer
       # MonitoringInterval: Integer
       # MonitoringRoleArn: String
@@ -82,8 +128,8 @@ Resources:
       StorageType: standard
       Tags: 
         - Key: Name
-          Value: todo-app-rds-instance
+          Value: bookers2-rds-instance
       # Timezone: String
       # UseDefaultProcessorFeatures: Boolean
-      # VPCSecurityGroups: 
-      #   - String
+      VPCSecurityGroups: 
+        - !Ref Bookers2SecurityGroup
