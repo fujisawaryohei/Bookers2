@@ -1,5 +1,22 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: create EC2 instance
+Metadata:
+  "AWS::CloudFormation::Interface":
+    ParameterGroups:
+      - Label:
+          default: "EC2Instance Configuration"
+        Parameters:
+          - KeyPairName
+
+    ParameterLabels:
+      KeyPairName:
+        default: "KeyPairName"
+
+Parameters:
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Default: ""
+
 Resources:
   # EC2の作成
   Bookers2EC2:
@@ -34,7 +51,7 @@ Resources:
       # Ipv6Addresses: 
       #   - InstanceIpv6Address
       # KernelId: String
-      # KeyName: String
+      KeyName: !Ref KeyPairName
       # LaunchTemplate: 
       #   LaunchTemplateSpecification
       # LicenseSpecifications: 
