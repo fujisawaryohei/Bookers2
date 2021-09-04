@@ -39,10 +39,11 @@ gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 
 gem 'refile-mini_magick'
 
+gem 'faker'
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop'
