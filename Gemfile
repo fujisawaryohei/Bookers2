@@ -39,11 +39,10 @@ gem 'refile', require: 'refile/rails', github: 'manfe/refile'
 
 gem 'refile-mini_magick'
 
-
 group :development, :test do
   gem 'byebug', platform: :mri
-  gem 'faker'
   gem 'factory_bot_rails'
+  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop'
@@ -66,8 +65,8 @@ end
 
 group :production do
   # TODO: インストールされないので一旦Postgresqlで本番環境作る
-  gem 'mysql2'
   gem 'dotenv-rails'
+  gem 'mysql2'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
