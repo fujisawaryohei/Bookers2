@@ -54,6 +54,6 @@ class BooksController < ApplicationController
 
   def permission_checker(id)
     user_id = Book.find(id).user.id
-    redirect_to user_path(current_user), alert: I18n.t('views.alert.prohibited.edit') unless current_user.id == user_id
+    redirect_to books_path, alert: I18n.t('views.alert.prohibited.edit') unless current_user.id == user_id
   end
 end
