@@ -10,7 +10,7 @@ en:
         introduction: introduction
         profile_image: image
         password: password
-        password_confirmation: password_confirmation
+        password_confirmation: confirmation password
       book:
         title: Title
         body: Opinion
