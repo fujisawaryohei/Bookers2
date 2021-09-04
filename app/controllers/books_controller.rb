@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   def update
     @book = Book.find(params[:id])
     if @book.update(book_params)
-      redirect_to books_path, notice: I18n.t('views.notice.updated', model: Book.t)
+      redirect_to book_path(@book), notice: I18n.t('views.notice.updated', model: Book.t)
     else
       render 'edit'
     end

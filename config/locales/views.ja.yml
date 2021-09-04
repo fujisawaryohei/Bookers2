@@ -1,12 +1,14 @@
 ja:
   views:
+    index: "%{model} 一覧"
+    show: "%{model} 詳細"
+    new: "%{model} 新規登録"
+    edit: "%{model} 編集"
+    info: "%{model} 情報"
     role:
-      index: "%{model} 一覧"
-      detail: "%{model} 詳細"
-      new: "%{model} 新規登録"
-      edit: "%{model} 編集"
-      info: "%{model} 情報"
       show: 詳細
+      edit: 編集
+      back: 戻る
       create: 登録する
       update: 更新する
       delete: 削除する

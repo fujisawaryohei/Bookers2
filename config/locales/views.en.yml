@@ -1,14 +1,16 @@
 en:
   views:
+    index: "%{model}s"
+    show: "%{model} detail"
+    new: "New %{model}"
+    edit: "Editing %{model}"
+    info: "%{model} info"
     role:
-      index: "%{model}s"
-      detail: "%{model} detail"
-      new: "New %{model}"
-      edit: "Editing %{model}"
-      info: "%{model} info"
-      create: Create
       show: Show
-      update: Edit
+      edit: Edit
+      back: Back
+      create: "Create %{model}"
+      update: "Update %{model}"
       delete: Destroy
       submit: Submit
     alert:
