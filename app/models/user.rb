@@ -8,11 +8,12 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
 
   # Validation
-  validates :name, presence: true, length: { maximum: 30 }, uniqueness: true
+  validates :name, presence: true, length: { minimum: 2, maximum: 20 }, uniqueness: true
+  validates :introduction, length: { maximum: 50 }, allow_blank: true
   validates :email, length: { maximum: 50 }, allow_blank: true
 
   # deviseのvalidatableのpassword_confirmationをオーバーライドしてバリデーションをカスタマイズ
-  # 編集時にのみパスワードと確認用パスワードは任意にするようにする
+  # 編集時にのみパスワードと確認用パスワードは任意入力にする
   def password_required?
     new_record? || (persisted? && (password.present? || password_confirmation.present?))
   end
