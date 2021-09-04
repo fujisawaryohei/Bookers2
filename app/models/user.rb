@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
 
   # Validation
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :email, length: { maximum: 50 }, allow_blank: true
 
   # deviseのvalidatableのpassword_confirmationをオーバーライドしてバリデーションをカスタマイズ

@@ -3,10 +3,6 @@ Rails.application.routes.draw do
   root 'homes#index'
   get '/home/about', to: "homes#about"
 
-  # HomesController.action_methods.each do |action|
-  #   get "homes/#{action}" unless action == 'index'
-  # end
-
   # 認証 ルーティング
   devise_for :users, controllers: {
     'registrations': 'registrations',
