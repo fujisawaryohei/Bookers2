@@ -1,6 +1,7 @@
 <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
   <div class="user-edit">
     <h2><%= I18n.t("views.info", model: User.t) %></h2>
+    <%= render 'layouts/validation_error_message', resource: @user %>
     <%= form_with model: @user do |f| %>
       <div class="form-group">
         <%= f.label :name %>
